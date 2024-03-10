@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>start new wallclock</title>
+
+
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+:root{
+    --bgcolor:#ff9998;
+    --clock-frame:#545271;
+    --clock-bg:#fefefc;
+    --text-color:#4d4b63;
+    --sec:#ff5e5e;
+    --shadow:#181818;
+}
+body{
+    background:var(--bgcolor);
+    width:100vw;
+    height:100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.clock{
+    width:60vh;
+    height:60vh;
+    background-color: var(--clock-frame);
+    border-radius: 50%;
+    box-shadow: 1px 1px 5px 10px var(--shadow);
+    position: relative; 
+}
+.inner-bg{
+    width:90%;
+    height:90%;
+    box-shadow: 0 0 3px var(--shadow);
+    position: absolute;
+    border-radius: 50%;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+.inner-bg:nth-of-type(2){
+    width:85%;
+    height:85%;
+    background-color: var(--clock-bg);
+    box-shadow: none;
+}
+.inner-bg:nth-of-type(2)::before{
+    content:'SIVAKUMAR';
+    position: absolute;
+    top:30%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    font-weight: 700;
+}
+.inner-bg:nth-of-type(2)::after{
+    content: 'DO IT TODAY';
+    position: absolute;
+    bottom:30%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    font-weight: 700;
+}
+.center-bg{
+    width:2%;
+    height:2%;
+    background-color: var(--clock-frame);
+    border-radius: 50%;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+}
+.needle{
+    --rotation:0;
+    position:absolute;
+    bottom:50%;
+    left:50%;
+    transform-origin: bottom;
+    transform: translate(-50%) rotate(calc(var(--rotation)*1deg));
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.hrs{
+    width:5px;
+    height:30%;
+    background:blue;
+}
+.min{
+    width:4px;
+    height:35%;
+    background:blueviolet;
+
+}
+.sec{
+    width:3px;
+    height:40%;
+    background:orange;
+}
+.sec::after{
+    content:'';
+    position: absolute;
+    width:3px;
+    height:50px;
+    bottom: -30px;
+    background-color: orange;
+}
+.clock-marks{
+    position: absolute;
+    width:3px;
+    height:50%;
+    top:0%;
+    left:50%;
+     transform: translate(-50%); 
+     transform-origin: bottom;
+}
+.clock-marks::before{
+    content:'';
+    position: absolute;
+    top:20px;
+    transform: translate(-50%);
+    font-weight: 700;
+
+}
+.clock-marks::after{
+
+    content:'';
+    position: absolute;
+    width:3px;
+    height:3px;
+    background-color: lightpink;
+    border-radius: 50%;
+    top:4px;
+    left:50%;
+    transform:translate(-50%)
+}
+.clock-marks:nth-child(1){transform: rotate(0deg);}
+.clock-marks:nth-child(2){transform: rotate(6deg);}
+.clock-marks:nth-child(3){transform: rotate(12deg);}
+.clock-marks:nth-child(4){transform: rotate(18deg);}
+.clock-marks:nth-child(5){transform: rotate(24deg);}
+.clock-marks:nth-child(6){transform: rotate(30deg);}
+.clock-marks:nth-child(7){transform: rotate(36deg);}
+.clock-marks:nth-child(8){transform: rotate(42deg);}
+.clock-marks:nth-child(9){transform: rotate(48deg);}
+.clock-marks:nth-child(10){transform: rotate(54deg);}
+.clock-marks:nth-child(11){transform: rotate(60deg);}
+.clock-marks:nth-child(12){transform: rotate(66deg);}
+.clock-marks:nth-child(13){transform: rotate(72deg);}
+.clock-marks:nth-child(14){transform: rotate(78deg);}
+.clock-marks:nth-child(15){transform: rotate(84deg);}
+.clock-marks:nth-child(16){transform: rotate(90deg);}
+.clock-marks:nth-child(17){transform: rotate(96deg);}
+.clock-marks:nth-child(18){transform: rotate(102deg);}
+.clock-marks:nth-child(19){transform: rotate(108deg);}
+.clock-marks:nth-child(20){transform: rotate(114deg);}
+.clock-marks:nth-child(21){transform: rotate(120deg);}
+.clock-marks:nth-child(22){transform: rotate(126deg);}
+.clock-marks:nth-child(23){transform: rotate(132deg);}
+.clock-marks:nth-child(24){transform: rotate(138deg);}
+.clock-marks:nth-child(25){transform: rotate(144deg);}
+.clock-marks:nth-child(26){transform: rotate(150deg);}
+.clock-marks:nth-child(27){transform: rotate(156deg);}
+.clock-marks:nth-child(28){transform: rotate(162deg);}
+.clock-marks:nth-child(29){transform: rotate(168deg);}
+.clock-marks:nth-child(30){transform: rotate(174deg);}
+.clock-marks:nth-child(31){transform: rotate(180deg);}
+.clock-marks:nth-child(32){transform: rotate(186deg);}
+.clock-marks:nth-child(33){transform: rotate(192deg);}
+.clock-marks:nth-child(34){transform: rotate(198deg);}
+.clock-marks:nth-child(35){transform: rotate(204deg);}
+.clock-marks:nth-child(36){transform: rotate(210deg);}
+.clock-marks:nth-child(37){transform: rotate(216deg);}
+.clock-marks:nth-child(38){transform: rotate(222deg);}
+.clock-marks:nth-child(39){transform: rotate(228deg);}
+.clock-marks:nth-child(40){transform: rotate(234deg);}
+.clock-marks:nth-child(41){transform: rotate(240deg);}
+.clock-marks:nth-child(42){transform: rotate(246deg);}
+.clock-marks:nth-child(43){transform: rotate(252deg);}
+.clock-marks:nth-child(44){transform: rotate(258deg);}
+.clock-marks:nth-child(45){transform: rotate(264deg);}
+.clock-marks:nth-child(46){transform: rotate(270deg);}
+.clock-marks:nth-child(47){transform: rotate(276deg);}
+.clock-marks:nth-child(48){transform: rotate(282deg);}
+.clock-marks:nth-child(49){transform: rotate(288deg);}
+.clock-marks:nth-child(50){transform: rotate(294deg);}
+.clock-marks:nth-child(51){transform: rotate(300deg);}
+.clock-marks:nth-child(52){transform: rotate(306deg);}
+.clock-marks:nth-child(53){transform: rotate(312deg);}
+.clock-marks:nth-child(54){transform: rotate(318deg);}
+.clock-marks:nth-child(55){transform: rotate(324deg);}
+.clock-marks:nth-child(56){transform: rotate(330deg);}
+.clock-marks:nth-child(57){transform: rotate(336deg);}
+.clock-marks:nth-child(58){transform: rotate(342deg);}
+.clock-marks:nth-child(59){transform: rotate(348deg);}
+.clock-marks:nth-child(60){transform: rotate(354deg);}
+
+.clock-marks:nth-child(1)::before {
+    content:'12';
+    transform: translate(-50%,-50%) rotate(-0deg);
+}
+.clock-marks:nth-child(6)::before {
+    content:'1';
+    transform: translate(-50%,-50%) rotate(-30deg);
+}
+.clock-marks:nth-child(11)::before {
+    content:'2';
+    transform: translate(-50%,-50%) rotate(-60deg);
+}
+.clock-marks:nth-child(16)::before {
+    content:'3';
+    transform: translate(-50%,-50%) rotate(-90deg);
+}
+.clock-marks:nth-child(21)::before {
+    content:'4';
+    transform: translate(-50%,-50%) rotate(-120deg);
+}
+.clock-marks:nth-child(26)::before {
+    content:'5';
+    transform: translate(-50%,-50%) rotate(-150deg);
+}
+.clock-marks:nth-child(31)::before {
+    content:'6';
+    transform: translate(-50%,-50%) rotate(-180deg);
+}
+.clock-marks:nth-child(36)::before {
+    content:'7';
+    transform: translate(-50%,-50%) rotate(-210deg);
+}
+.clock-marks:nth-child(41)::before {
+    content:'8';
+    transform: translate(-50%,-50%) rotate(-240deg);
+}
+.clock-marks:nth-child(46)::before {
+    content:'9';
+    transform: translate(-50%,-50%) rotate(-270deg);
+}
+.clock-marks:nth-child(51)::before {
+    content:'10';
+    transform: translate(-50%,-50%) rotate(-300deg);
+}
+.clock-marks:nth-child(56)::before {
+    content:'11';
+    transform: translate(-50%,-50%) rotate(-330deg);
+}
+.clock-marks:nth-child(5n+1)::after {
+    height:5px;
+    width:5px;
+    background-color: purple;
+}
+    </style>
+
+
+</head>
+<body>
+    <div class="clock">
+        <div class="inner-bg"></div>
+        <div class="inner-bg">
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>
+            <div class="clock-marks"></div>        </div>
+        <div class="needle hrs"></div>
+        <div class="needle min"></div>
+        <div class="needle sec"></div>
+        <div class="center-bg"></div>
+    </div>
+
+
+
+
+    <script>
+        const hour=document.querySelector('.hrs');
+const minute=document.querySelector('.min');
+const second=document.querySelector('.sec');
+
+
+
+setInterval(runClock,1000)
+function runClock() {
+    const time= new Date();
+    const sec=time.getSeconds()/60;
+    const min=(sec+time.getMinutes())/60;
+    const hrs=(min+time.getHours())/12;
+
+
+    hour.style.setProperty('--rotation',hrs*360);
+    minute.style.setProperty('--rotation',min*360)
+    second.style.setProperty('--rotation',sec*360)
+
+}
+runClock();
+    </script>
+    </body>
+    </html>

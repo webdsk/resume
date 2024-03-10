@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>snake game</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        *{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body{
+    background-color: hsl(64, 98%, 76%);
+    text-align:center;
+}
+h2{
+    color: green;
+}
+#msg{
+    color: rgb(113, 43, 226);
+    margin-top: 10px;
+}
+.score{
+    font-weight: 700;
+    color: brown;
+    font-size: 25px;
+
+}
+#game{
+    border:5px solid black;
+}
+
+    </style>
+</head>
+<body>
+    <h2>SNAKE GAME</h2>
+    <div id="msg">press space to pause or continue</div>
+    <div class="container">
+        <canvas id="game" width="500" height="500"></canvas>
+        <div class="score">score:<span id="select">0</span></div>
+    </div>
+   
+
+    <script>
+        const game=document.getElementById('game');
+const context=game.getContext('2d');
+
+const WIDTH=game.width;
+const HEIGHT=game.height;
+const UNIT=20;
+
+let foodX;
+let foodY;
+let xvel=20;
+let yvel=0;
+
+let snake=[
+    {x:UNIT*3,y:0},
+    {x:UNIT*2,y:0},
+    {x:UNIT,y:0},
+    {x:0,y:0}
+];
+
+window.addEventListener('keydown',keypress)
+
+
+startGame();
+
+function startGame() {
+
+    context.fillStyle='#633837';
+    context.fillRect(0,0,WIDTH,HEIGHT);
+
+    createfood();
+    displayfood();
+    nextTick();
+//     drawsnake();
+//     movesnake();
+//     drawsnake();
+// 
+}
+
+function clearBoard() {
+    context.fillStyle = '#633837';
+    context.fillRect(0,0,WIDTH,HEIGHT)
+
+    
+}
+function createfood() {
+     foodX=Math.floor(Math.random()*WIDTH/UNIT)*UNIT;
+     foodY=Math.floor(Math.random()*HEIGHT/UNIT)*UNIT;
+}
+
+function displayfood() {
+
+    context.fillStyle='white'
+    context.fillRect(foodX,foodY,UNIT,UNIT)   
+}
+
+function drawsnake() {
+    context.fillStyle='aqua';
+    context.strokeStyle='#633837';
+    snake.forEach((snakePart)=>{
+        context.fillRect(snakePart.x,snakePart.y,UNIT,UNIT)
+        context.strokeRect(snakePart.x,snakePart.y,UNIT,UNIT)
+    })
+}
+
+function movesnake() {
+
+    const head={x:snake[0].x+xvel,
+                y:snake[0].y+yvel}
+     snake.unshift(head)  
+     snake.pop()         
+}
+
+function nextTick(){
+    setTimeout(()  =>{
+
+        clearBoard();
+        displayfood();
+        movesnake();
+        drawsnake();
+        nextTick()
+
+    },100);
+}
+function keypress(event){
+    const LEFT=37
+    const UP=38
+    const RIGHT=39
+    const DOWN=40
+
+    switch (true) {
+        case (event.keycode==LEFT):
+            xvel=-UNIT;
+            yvel=0;
+            break;
+
+        case(event.keycode==RIGHT):   
+            xvel=UNIT;
+            yvel=0;
+            break;
+
+        case(event.keycode==UP): 
+            xvel=0;
+            yvel=-UNIT;
+            break;  
+            
+         case(event.keycode==DOWN):
+             xvel=0;
+             yvel=UNIT;   
+             break;
+        
+    }
+
+}
+
+
+    </script>
+
+
+</body>
+</html>
+ 
